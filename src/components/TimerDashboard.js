@@ -3,26 +3,22 @@ import EditableTimerList from './EditableTImerList';
 import ToggleableTimeForm from "./ToggleableTimerForm";
 import { v4 as uuudv4} from 'uuid';
 import Helpers from "../helpers";
+import Client from "../client";
 
 class TimerDashboard extends React.Component {
     state = {
-        timers: [
-            {
-                title: "React JS",
-                project: "Timer App",
-                id: uuudv4(),
-                elapsed: 898484,
-                runningSince: Date.now() 
-            },
-            {
-                title: "Laravel",
-                project: "REST E-commerce",
-                id: uuudv4(),
-                elapsed: 86442,
-                runningSince: null 
-            },
-        ]
+        timers: []
     };
+
+    componentDidMount() {
+        this.loadTimersFromServer();
+        setInterval(this.loadTimersFromServer, 5000);
+    }
+    loadTimersFromServer = () => {
+        Client.getTimers( (serverResponse) => {
+            this.setState( {timers: serverResponse});
+        });
+    }
     handleCreateFormSubmit = (timer) => {
         this.createTimer(timer);
     }
