@@ -7,8 +7,15 @@ class Timer extends React.Component {
         this.props.onTrashClick(this.props.id);
     };
     
+    componentDidMount() {
+        this.forceUpdateInterval = setInterval( () => this.forceUpdate(), 50 );
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.forceUpdateInterval);
+    }
     render() {
-        const elapsedString = Helpers.renderElapsedString(this.props.elapsed);
+        const elapsedString = Helpers.renderElapsedString(this.props.elapsed, this.props.runningSince);
         return(
             <div className="ui centered card">
                 <div className="content">
