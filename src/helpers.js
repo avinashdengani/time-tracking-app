@@ -1,4 +1,16 @@
+import {v4 as uuidv4} from 'uuid';
+
 const Helpers = (function() {
+    function newTimer(attrs = {}) {
+        const timer = {
+            title: attrs.title || 'Timer',
+            project: attrs.project || 'Project',
+            id: uuidv4(),
+            elapsed: 0
+        };
+
+        return timer;
+    }
     function renderElapsedString(elapsed) {
         return millisecondsToHuman(elapsed);
     }
@@ -30,6 +42,7 @@ const Helpers = (function() {
         renderElapsedString,
         millisecondsToHuman,
         pad,
+        newTimer
     };
 }());
 

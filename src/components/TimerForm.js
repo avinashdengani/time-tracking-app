@@ -9,28 +9,43 @@ class TimerForm extends React.Component {
         this.setState({title: evt.target.value});
     };
     handleProjectChange = (evt) => {
-        this.setState({title: evt.target.value});
+        this.setState({project: evt.target.value});
     };
+    handleSubmit = () => { 
+        const timer = {
+            id: this.props.id,
+            title: this.state.title,
+            project: this.state.project
+        };
+        this.props.onFormSubmit(timer);
+    }
     render() {
-        const submitText = this.props.title ? 'Update' : 'Create';
-
+        const submitText = this.props.id ? 'Update' : 'Create';
         return (
             <div className="ui centered card">
                 <div className="content">
                     <div className="ui form">
                         <div className="field">
                             <label>Title</label>
-                            <input type='text' defaultValue={this.state.title} />
+                            <input 
+                                type='text' 
+                                value={this.state.title}
+                                onChange={this.handleTitleChange} 
+                            />
                         </div>
                         <div className="field">
-                            <label>project</label>
-                            <input type='text' defaultValue={this.state.project} />
+                            <label>Project</label>
+                            <input 
+                                type='text' 
+                                value={this.state.project}
+                                onChange={this.handleProjectChange}
+                            />
                         </div>
                         <div className="ui two bottom attached buttons">
-                            <button className="ui basic blue button">
+                            <button className="ui basic blue button" onClick={this.handleSubmit}>
                                 {submitText}
                             </button>
-                            <button className="ui basic red button">
+                            <button className="ui basic red button" onClick={this.props.onFormClose}>
                                 Cancel
                             </button>
                         </div>
