@@ -44,6 +44,8 @@ class EditableTimer extends React.Component {
                 runningSince={this.props.runningSince}
                 onEditClick={this.handleEditCLick}
                 onTrashClick={this.props.onTrashClick}
+                onStartClick = { this.props.onStartClick }
+                onStopClick = { this.props.onStopClick }
             />
         )
     }
