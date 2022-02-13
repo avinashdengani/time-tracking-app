@@ -12,6 +12,7 @@ class EditableTimerList extends React.Component {
                 key={timer.id}
                 runningSpace={timer.runningSpace}
                 onFormSubmit={this.props.onFormSubmit}
+                onTrashClick={this.props.onTrashClick}
             />
         ));
         return(
